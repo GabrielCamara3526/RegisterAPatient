@@ -4,7 +4,7 @@ while True:
     name = str(input("Name: "))
     age = int(input("Age: "))
     temperature = float(input("Body temperature (ºC): "))
-    cough_duration = int(input("Duration of cough (days): "))
+    cough_duration = int(input("Duration of cough symptoms (days): "))
     headache_duration = int(input("Duration of headache (days): "))
 
     print('Have you visited any of these countries? ')
