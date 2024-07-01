@@ -1,22 +1,62 @@
-while True:
-    print("=" * 14, "REGISTER PATIENT", "=" * 14)
+from tkinter import *
+import ctypes as ct
 
-    name = str(input("Name: "))
-    age = int(input("Age: "))
-    temperature = float(input("Body temperature (ºC): "))
-    cough_duration = int(input("Duration of cough symptoms (days): "))
-    headache_duration = int(input("Duration of headache (days): "))
+def dark_title_bar(window):
+    """
+    MORE INFO:
+    https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
+    """
+    window.update()
+    set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+    get_parent = ct.windll.user32.GetParent
+    hwnd = get_parent(window.winfo_id())
+    value = 2
+    value = ct.c_int(value)
+    set_window_attribute(hwnd, 20, ct.byref(value), 4)
 
-    print('Have you visited any of these countries? ')
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2)
+    y = (screen_height // 2) - (height // 2)
+    window.geometry(f'{width}x{height}+{x}+{y}')
 
-    countries_visited = ['USA', 'Italy', 'Indonesia', 'China', 'Portugal']
+splash_screen = Tk()
+splash_screen.title('Register Patients')
 
-    for idx, country in enumerate(countries_visited, start=1):
-        print(f"{idx}. {country}")
+splash_screen.configure(bg='#10c4e0')
+splash_screen.resizable(False, False)
+dark_title_bar(splash_screen)
 
-    response = input("(Enter the country number or 0 if not applicable): ")
+app_width = 300
+app_height = 200
+center_window(splash_screen, app_width, app_height)
 
-    if temperature >= 37.5 or cough_duration >= 14 or headache_duration >= 3 or response != '0':
-        print("Status: Quarantine")
-    else:
-        print("Status: Released")
+welcome_label = Label(splash_screen, text='Welcome to HealthCheckBR!', font=('Helvetica', 16), 
+                      bg='darkgreen', fg='white', width=28)
+welcome_label.pack()
+
+welcome_text = Label(splash_screen,text='This app is made to check the \nhealth of a person for quarantine \nexamination. You can add patients one by one.', height=5, width=35, font=('Arial', 14), bg='white', wraplength=290)
+welcome_text.pack()
+
+def main_window():
+    splash_screen.destroy()
+    root = Tk()
+    root.configure(bg='#242424')
+    root.title('HealthCheckBR')
+    dark_title_bar(root)
+    
+    main_width = 720
+    main_height = 480
+    center_window(root, main_width, main_height)
+
+    # You can add more widgets to the main window here
+
+    root.mainloop()
+
+accept_button = Button(splash_screen, text='Understood!', bg='green', fg='white',
+                       font=('Helvetica', 18), activebackground='darkgreen', activeforeground='white',
+                       command=main_window)
+accept_button.pack(pady=5)
+
+splash_screen.mainloop()
