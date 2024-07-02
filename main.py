@@ -36,7 +36,8 @@ welcome_label = Label(splash_screen, text='Welcome to HealthCheckBR!', font=('He
                       bg='darkgreen', fg='white', width=28)
 welcome_label.pack()
 
-welcome_text = Label(splash_screen,text='This app is made to check the \nhealth of a person for quarantine \nexamination. You can add patients one by one.', height=5, width=35, font=('Arial', 14), bg='white', wraplength=290)
+welcome_text = Label(splash_screen,text='This app is made to check the \nhealth of a person for quarantine \nexamination. You can add patients one by one.', 
+                     height=5, width=35, font=('Arial', 15), bg='white', wraplength=290)
 welcome_text.pack()
 
 def main_window():
@@ -51,11 +52,17 @@ def main_window():
     center_window(root, main_width, main_height)
 
     # You can add more widgets to the main window here
+    title_label = Label(root, text='All Patients', font=('Arial', 20, 'bold'), bg='#242424', fg='white')
+    title_label.pack()
+
+    add_patient = Button(root, text='+', font=('Arial', 28,'bold'), width=25, bg='#181818', fg='white', 
+                         activebackground='#555', activeforeground='white', border=0)
+    add_patient.pack()
 
     root.mainloop()
 
 accept_button = Button(splash_screen, text='Understood!', bg='green', fg='white',
-                       font=('Helvetica', 18), activebackground='darkgreen', activeforeground='white',
+                       font=('Helvetica', 18), activebackground='darkgreen', activeforeground='white', border=0,
                        command=main_window)
 accept_button.pack(pady=5)
 
