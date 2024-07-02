@@ -55,9 +55,13 @@ def main_window():
     title_label = Label(root, text='All Patients', font=('Arial', 20, 'bold'), bg='#242424', fg='white')
     title_label.pack()
 
-    add_patient = Button(root, text='+', font=('Arial', 28,'bold'), width=25, bg='#181818', fg='white', 
+    add_patient = Button(root, text='+ Add patient', font=('Arial', 28,'bold'), width=25, bg='#181818', fg='white', 
                          activebackground='#555', activeforeground='white', border=0)
-    add_patient.pack()
+    add_patient.pack(pady=5)
+
+    remove_patient = Button(root, text='- Remove patient', font=('Arial', 28, 'bold'), width=25, bg='#181818', fg='white',
+                            activebackground='#555', activeforeground='white', border=0)
+    remove_patient.pack(pady=5)
 
     root.mainloop()
 
